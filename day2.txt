@@ -1,0 +1,14 @@
+int main() {
+    double meal_cost; 
+    scanf("%lf", &meal_cost);
+    int tip_percent; 
+    scanf("%i", &tip_percent);
+    int tax_percent; 
+    scanf("%i", &tax_percent);
+    double totalCost;
+    totalCost = meal_cost +(meal_cost*tip_percent/100)+(meal_cost*tax_percent/100);
+    round(totalCost);
+    printf("The total meal cost is %.0lf dollars.",totalCost);
+    
+    return 0;
+}

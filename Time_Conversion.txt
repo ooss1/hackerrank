@@ -1,0 +1,43 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+char * timeConversion(char* s) {
+    // Complete this function
+    char ch_hour[2];
+    char *temp_time;
+    int num_hour=0;
+    int i = 0;
+    
+   temp_time = (char *)malloc(sizeof(s+1));
+    while( s[i]!='P'){ if(s[i]=='A') break; temp_time[i] = s[i]; i++;}
+    
+    num_hour +=atoi(s);
+    
+    if(s[i]=='P' && num_hour==12) ;
+    else if(s[i]=='P' ||num_hour==12) num_hour +=12;
+
+    
+    if(num_hour==24) { hour[0] = 48; hour[1] =48; }
+    else{
+    hour[0] = (num_hour/10)+48;
+    hour[1] = (num_hour%10)+48;
+    }
+    temp_time[0] = hour[0];
+    temp_time[1] = hour[1];
+  
+    return temp_time;
+}
+
+int main() {
+    char* s = (char *)malloc(512000 * sizeof(char));
+    scanf("%s", s);
+    char * result;
+    result=timeConversion(s);
+    printf("%s\n", result);
+    return 0;
+}

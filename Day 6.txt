@@ -1,0 +1,24 @@
+int main() {
+    int a;
+    int i,j;
+
+    char *str[10];
+    scanf("%d",&a);
+   for(i=0;i<a;i++) { 
+       char ch[30000];
+       scanf("%s",ch);
+       str[i]=(char *)malloc(sizeof(ch)+1);
+       strcpy(str[i],ch);
+    }
+   
+    
+   for(i=0;i<a;i++){
+        for(j=0;j<strlen(str[i]);j+=2) printf("%c",str[i][j]);
+     printf(" ");
+      for(j=1;j<strlen(str[i]);j+=2) printf("%c",str[i][j]);
+       printf("\n");
+      free(str[i]);
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}

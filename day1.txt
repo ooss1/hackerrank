@@ -1,0 +1,18 @@
+  FILE *fp;
+
+    // Declare second integer, double, and String variables.
+    int sum_i;
+    double sum_d;
+    char str[100];
+    
+    scanf("%d %lf",&sum_i,&sum_d);
+    sum_i+=i;
+    sum_d+=d;
+    printf("%d\n",sum_i);
+    printf("%.1lf\n",sum_d);
+    printf("%s",s);
+   while(1){
+    if((scanf("%s ",str)!=1)) break;
+    printf("%s ",str);
+
+}

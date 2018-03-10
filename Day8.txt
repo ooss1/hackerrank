@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct __memeber {
+    char name[50];
+    long int score;
+}member;
+
+int search_name(member *mem,char *temp_str,int n){
+    
+    for(int i=0;i<n;i++){
+        if(strcmp(mem[i].name,temp_str)==0) return i;
+    }
+    return -1;
+}
+int main() {
+    member *mem;
+    long int n;
+    scanf("%ld",&n);
+    mem = (member *)malloc(sizeof(member)*n);
+    for(int i=0;i<n;i++){
+    int temp_str_len;
+    if((scanf("%s %d",mem[i].name,&mem[i].score))!=2) break;
+    temp_str_len = strlen(temp_str);
+    mem[i].name = (char *)malloc(temp_str_len+1);
+    strncpy(mem[i].name,temp_str,temp_str_len);
+    mem[i].name[temp_str_len+1] ='\0';
+    }
+    
+    for(int i=0;i<n;i++){
+    int is_same;
+    char temp_str[50];
+    if((scanf("%s",temp_str))!=1) break;
+    
+    is_same =search_name(mem,temp_str,n);
+    if(is_same !=-1 ) printf("%s=%d\n",mem[is_same].name,mem[is_same].score);
+    else printf("Not found\n");
+    }
+    return 0;
+}

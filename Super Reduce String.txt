@@ -1,0 +1,57 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+char* super_reduced_string(char* s){
+    static char temp_string[101];
+    char ch;
+    int i = 0;
+    int count = 0;
+    int temp_index = 0;
+    int flag=0;
+    
+    while(1){
+        while(s[i]!='\0'){
+            switch(count){
+                case 0:
+                    ch = s[i];
+                    count ++;
+                    if(s[i+1]=='\0') temp_string[temp_index]= ch;
+                    break;
+                case 1:
+                    if(ch !=s[i]){
+                    
+                        temp_string[temp_index] = ch;
+                        ch = s[i];
+                        temp_index++;
+                        if(s[i+1]=='\0') temp_string[temp_index]= ch;
+                    }
+                    else if(ch == s[i]) {flag =1; count = 0;}
+                    
+            }
+            i++;
+        }
+        if( flag ==0 || temp_index ==0 ) break;
+        flag = 0;
+        temp_string[temp_index+1] = '\0';
+        strcpy(s,temp_string);
+        count = 0;
+        temp_index = 0;
+        i=0;
+    }
+    if(temp_index==0) strcpy(temp_string,"Empty String");
+    return temp_string;
+}
+
+int main() {
+    char* s = (char *)malloc(512000 * sizeof(char));
+    scanf("%s", s);
+    int result_size;
+    char* result = super_reduced_string(s);
+    printf("%s\n", result);
+    return 0;
+}

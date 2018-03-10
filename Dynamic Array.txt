@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int main() {
+    int n,q; // n  =  matrix num, q = query num
+    int lastAnswer = 0 ;
+    int **matrix;
+    int * matrix_size;
+    int menu,x,y;
+    int index;
+    int size;
+    scanf("%d %d",&n,&q);
+    matrix = (int **)malloc(sizeof(int *)*n);
+    matrix_size = (int *)malloc(sizeof(int)*n);
+    for(int i = 0;i<n;i++){
+        matrix_size[i]=1;
+    }
+    
+    
+    for(int i=0;i<q;i++){
+        scanf("%d %d %d",&menu,&x,&y);
+        switch(menu){
+            case 1:
+                index =((x^lastAnswer)%n);
+                matrix[index] = realloc(matrix[index],matrix_size[index]*sizeof(int));
+         //       printf("index %ld  size %d\n",index,size);
+                matrix[index][matrix_size[index]-1]=y;
+         //       printf("mat : %d\n",matrix[index][size]);
+                matrix_size[index]++;
+                break;
+            case 2:
+                index =((x^lastAnswer)%n);
+                size = y%(matrix_size[index] -1) ;
+                lastAnswer = matrix[index][size];
+                printf("%d\n",lastAnswer);
+                break;
+            default:
+                break;
+        }
+      
+    }
+     for(int i = 0; i < n; i++)
+            free(matrix[i]);     
+    free(matrix);
+    free(matrix_size);
+    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
