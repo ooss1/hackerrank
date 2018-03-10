@@ -1,0 +1,26 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+int main(){
+    int n;
+    int counter=0;
+    int max_count = 0;
+    scanf("%d",&n);
+    while(1){
+        if(n%2==1)counter++;
+        else {
+                if(max_count<counter) max_count = counter;
+                counter= 0;
+             }
+        if(n==0) break;
+        n/=2;
+       
+    }
+    printf("%d",max_count);
+    return 0;
+}
