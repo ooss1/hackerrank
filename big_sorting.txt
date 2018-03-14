@@ -19,6 +19,7 @@ char** bigSorting(int arr_size, char** arr, int *result_size) {
     int j_len;
     int sort_index;
     int k;
+    int flag;
     int i,j,q,z;
     result = (char **)malloc(sizeof(char*)*arr_size);
     map_result_is_sort = (int *)malloc(sizeof(int*)*arr_size);
@@ -27,11 +28,16 @@ char** bigSorting(int arr_size, char** arr, int *result_size) {
     
     
     for(i=0;i<arr_size+1;i++){
+        flag = 0;
         for(z=0;z<arr_size;z++){
             if(map_result_is_sort[z]==1) continue;
+            else{
             temp_s.str_len = strlen(arr[z]);
             strcpy(temp_s.temp,arr[z]);
             sort_index = z;
+            flag =1;
+            break;
+            }
         }
         for(j=0;j<arr_size;j++){
              if(j==z || map_result_is_sort[j]==1) continue;
@@ -42,6 +48,7 @@ char** bigSorting(int arr_size, char** arr, int *result_size) {
                 temp_s.str_len = j_len;
                 strcpy(temp_s.temp,arr[j]);
                 sort_index = j;
+                flag = 1;
                 }
             else if(temp_s.str_len == j_len){
                 while(1){
@@ -51,6 +58,7 @@ char** bigSorting(int arr_size, char** arr, int *result_size) {
                         temp_s.str_len  = j_len;
                         strcpy(temp_s.temp,arr[j]);
                         sort_index = j;
+                        flag =1;
                         break;
                     }
                     else if(temp_s.temp[k]<arr[j][k]) break;
@@ -58,7 +66,9 @@ char** bigSorting(int arr_size, char** arr, int *result_size) {
                     if(temp_s.temp[k]=='\0') break;   
                 }
             }
+            
         }
+        if(flag==0) break;
       // printf("------------------------------\n");
         //printf("%s\n ",temp_s.temp);
         result[i] = (char *)malloc((temp_s.str_len * sizeof(char)+1));
