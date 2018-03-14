@@ -1,0 +1,96 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+typedef struct{
+    int str_len;
+    char temp[1000000];
+}temp_str;
+
+char** bigSorting(int arr_size, char** arr, int *result_size) {
+    // Complete this function
+    char **result;
+    int *map_result_is_sort;
+    temp_str temp_s;
+    int j_len;
+    int sort_index;
+    int k;
+    int i,j,q,z;
+    result = (char **)malloc(sizeof(char*)*arr_size);
+    map_result_is_sort = (int *)malloc(sizeof(int*)*arr_size);
+    memset(map_result_is_sort, 0, sizeof(int*)*arr_size);
+    *result_size = arr_size;
+    
+    
+    for(i=0;i<arr_size+1;i++){
+        for(z=0;z<arr_size;z++){
+            if(map_result_is_sort[z]==1) continue;
+            temp_s.str_len = strlen(arr[z]);
+            strcpy(temp_s.temp,arr[z]);
+            sort_index = z;
+        }
+        for(j=0;j<arr_size;j++){
+             if(j==z || map_result_is_sort[j]==1) continue;
+            j_len = strlen(arr[j]);
+            k=0;
+            if(temp_s.str_len >j_len) {
+                   //      printf("%s\n ",temp_s.temp);
+                temp_s.str_len = j_len;
+                strcpy(temp_s.temp,arr[j]);
+                sort_index = j;
+                }
+            else if(temp_s.str_len == j_len){
+                while(1){
+                  //printf("ab: %s %s\n",temp_s.temp,arr[j]);
+                    if(temp_s.temp[k]>arr[j][k]) {
+                   //    printf("ab: %s %s\n",temp_s.temp,arr[j]);
+                        temp_s.str_len  = j_len;
+                        strcpy(temp_s.temp,arr[j]);
+                        sort_index = j;
+                        break;
+                    }
+                    else if(temp_s.temp[k]<arr[j][k]) break;
+                    k++;
+                    if(temp_s.temp[k]=='\0') break;   
+                }
+            }
+        }
+      // printf("------------------------------\n");
+        //printf("%s\n ",temp_s.temp);
+        result[i] = (char *)malloc((temp_s.str_len * sizeof(char)+1));
+        map_result_is_sort[sort_index] = 1;
+        // for(q=0;q<arr_size;q++) printf("ma: %d ",  map_result_is_sort[q]);
+       // printf("\n");
+        strcpy(result[i],temp_s.temp);
+    }
+    return result;
+}
+
+int main() {
+    int n; 
+    scanf("%i", &n);
+    char* *arr = malloc(sizeof(char*) * n);
+    char temp[100000];
+    for (int arr_i = 0; arr_i < n; arr_i++) {
+        scanf("%s",temp);
+       arr[arr_i] = (char *)malloc((strlen(temp)+1)* sizeof(char));
+       strcpy(arr[arr_i],temp);
+    }
+    int result_size;
+    char** result = bigSorting(n, arr, &result_size);
+    for(int result_i = 0; result_i < result_size; result_i++) {
+        if(result_i) {
+            printf("\n");
+        }
+        printf("%s", result[result_i]);
+    }
+    puts("");
+
+
+    return 0;
+}
+
