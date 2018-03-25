@@ -1,2 +1,0 @@
-https://m.blog.naver.com/PostList.nhn?blogId=s2kiess&logCode=0&categoryNo=135&currentPage=2
-http://elixir.bootlin.com/linux/latest/ident/gpio_direction_output
